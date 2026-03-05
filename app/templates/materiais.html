@@ -1,0 +1,24 @@
+<h2>Cadastrar Material</h2>
+
+<form method="POST">
+    <label>Nome:</label>
+    <input type="text" name="nome" required>
+
+    <label>Custo Unitário:</label>
+    <input type="number" step="0.01" name="custo_unitario" required>
+
+    <label>Unidade de Medida:</label>
+    <input type="text" name="unidade" required>
+
+    <button type="submit">Salvar</button>
+</form>
+
+<h2>Lista de Materiais</h2>
+
+<ul>
+{% for material in materiais %} <!--percorre a lista-->
+    <li>
+        {{ material.nome }} - R$ {{ material.custo_unitario }} {{ material.unidade_medida }}
+    </li>
+{% endfor %}
+<ul>
