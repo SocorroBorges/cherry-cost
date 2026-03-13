@@ -52,6 +52,7 @@ Algumas melhorias planejadas:
 ## 👩‍💻 Autoras
 
 [Maria do Socorro Vieira Borges](https://www.linkedin.com/in/maria-do-socorro-vieira-borges/) - Backend 
+
 [Maria de N. V. Borges](https://www.linkedin.com/in/maria-de-n-v-borges-7a7315399/) — Fontend
 
 Projeto desenvolvido para aprendizado prático em desenvolvimento web com Python.
