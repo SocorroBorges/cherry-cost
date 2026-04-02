@@ -1,20 +1,22 @@
 document.addEventListener("DOMContentLoaded", function () {
 
     document.querySelectorAll(".btn-editar").forEach(botao => {
-        botao.addEventListener("click", function () {
+        botao.addEventListener("click", function (event) {
+            event.preventDefault()
 
-            const id = this.dataset.id
-            const nome = this.dataset.nome
-            const custo = this.dataset.custo
-            const unidade = this.dataset.unidade
+                const id = this.dataset.id
+                const nome = this.dataset.nome
+                const custo = this.dataset.custo
+                const unidade = this.dataset.unidade
 
-            abrirModal(id, nome, custo, unidade)
+                abrirModal(id, nome, custo, unidade)
         })
     })
 })
 
 function abrirModal(id, nome, custo, unidade) {
-    document.getElementById("modal").style.display = "flex"
+    const modal = document.getElementById("modal")
+    modal.classList.add("ativo")
 
     document.getElementById("edit-id").value = id
     document.getElementById("edit-nome").value = nome
@@ -23,7 +25,7 @@ function abrirModal(id, nome, custo, unidade) {
 }
 
 function fecharModal() {
-    document.getElementById("modal").style.display = "none"
+    document.getElementById("modal").classList.remove("ativo")
 }
 
 function salvarEdicao() {
@@ -44,5 +46,15 @@ function salvarEdicao() {
             unidade_medida: unidade
         })
     })
-    .then(() => location.reload())
+    .then(() => {
+        fecharModal()    // fecha o modal
+        location.reload()   // atualiza a tabela
+    })
 }
+
+window.addEventListener("click", function (event) { // Fechar clicando fora
+    const modal = document.getElementById("modal")
+    if (event.target == modal) {
+        fecharModal()
+    }
+})

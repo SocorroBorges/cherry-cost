@@ -1,7 +1,8 @@
 /* Fundo escuro atrás do modal. */
 #modal {
     display:none; /* começa escondido */
-    position: fidex;
+    
+    position: fixed;
     top: 0;
     left: 0;
     width: 100%;
@@ -13,13 +14,20 @@
     align-items: center;
 }
 
+/* Quando estiver ativo */
+#modal.ativo {
+    display: flex;
+    
+}
+
 /* Caixa branca do modal */
 #modal .modal-content {
     background-color: white;
     padding: 20px;
     border-radius: 10px;
 
-    width: 300px;
+    width: 280px;
+    max-width: 90%;
 }
 
 /*Inputs */
