@@ -47,14 +47,13 @@ function salvarEdicao() {
         })
     })
     .then(() => {
-        fecharModal()    // fecha o modal
-        location.reload()   // atualiza a tabela
+        fecharModal()    
+
+        // atualizar a tabela manualmente
+        const linha = document.querySelector(`tr[data-id="${id}"]`)
+
+        linha.children[0].innerText = nome
+        linha.children[1].innerText = custo
+        linha.children[2].innerText = unidade
     })
 }
-
-window.addEventListener("click", function (event) { // Fechar clicando fora
-    const modal = document.getElementById("modal")
-    if (event.target == modal) {
-        fecharModal()
-    }
-})
