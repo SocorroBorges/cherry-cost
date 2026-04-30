@@ -33,6 +33,8 @@ function salvarEdicao() {
     const nome = document.getElementById("edit-nome").value
     const custo = document.getElementById("edit-custo").value
     const unidade = document.getElementById("edit-unidade").value
+    const quantidade = document.getElementById("edit-quantidade").value
+    const notas = document.getElementById("edit-notas").value
 
     fetch("/editar_inline", {
         method: "POST",
