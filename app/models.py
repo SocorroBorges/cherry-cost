@@ -1,5 +1,6 @@
-from sqlalchemy import Column, Integer, String, Numeric, ForeignKey
+from sqlalchemy import Column, Integer, String, Numeric, ForeignKey, DateTime, Text
 from sqlalchemy.orm import declarative_base, relationship
+from datetime import datetime
 
 Base = declarative_base()
 
@@ -15,8 +16,21 @@ class Material(Base):
     __tablename__ = "materiais"
     id = Column(Integer, primary_key=True)
     nome = Column(String(100), nullable=False)
+    quantidade_estoque = Column(Integer, default=0)
     custo_unitario = Column(Numeric(10, 2), nullable=False)
     unidade_medida = Column(String(20), nullable=False)
+    notas = Column(Text)
+
+    ultima_atualizacao = Column(
+        DateTime,
+        default=datetime.utcnow,
+        onupdate=datetime.utcnow
+    )
+
+    producoes = relationship(
+        "ProducaoMaterial",
+        back_populates="material"
+    )
 
 
 class Produto(Base):
@@ -24,6 +38,11 @@ class Produto(Base):
     id = Column(Integer,primary_key=True)
     nome = Column(String(100), nullable=False)
     margem_lucro_percentual = Column(Numeric(5, 2), nullable=False)
+
+    producoes = relationship(
+        "Producao",
+        back_populates="produto"
+    )
 
 
 class Producao(Base):
@@ -34,6 +53,18 @@ class Producao(Base):
     custo_total = Column(Numeric(10, 2))
     preco_sugerido = Column(Numeric(10, 2))
 
+    data_producao = Column(DateTime, default=datetime.utcnow)
+
+    produto = relationship(
+        "Produto",
+        back_populates="producoes"
+    )
+
+    materiais_utilizados = relationship(
+        "ProducaoMaterial",
+        back_populates="producao"
+    )
+
 
 class ProducaoMaterial(Base):
     __tablename__ = "producao_materiais"
@@ -42,3 +73,13 @@ class ProducaoMaterial(Base):
     material_id = Column(Integer, ForeignKey("materiais.id"), nullable=False)
     quantidade_utilizada = Column(Numeric(10, 2), nullable=False)
     custo_calculado = Column(Numeric(10, 2))
+
+    producao = relationship(
+        "Producao",
+        back_populates="materiais_utilizados"
+    )
+
+    material = relationship(
+        "Material",
+        back_populates="producoes"
+    )
