@@ -18,7 +18,7 @@
     <label>Unidade de Medida:</label><br>
     <input type="text" name="unidade" required><br><br>
 
-    <label>Quantidade:</label>
+    <label>Quantidade no Estoque:</label>
     <input type="number" id="edit-quantidade">
 
     <label>Última Atualização:</label>
@@ -43,7 +43,7 @@
     </tr>
 
 {% for material in materiais %} <!--percorre a lista-->
-<tr>
+<tr data-id="{{ material.id }}">
     <td>{{ material.nome }}</td>
     <td>{{ material.custo_unitario }}</td>
     <td>{{ material.unidade_medida }}</td>
